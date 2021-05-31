@@ -1,0 +1,2 @@
+class URL < ApplicationRecord
+end
