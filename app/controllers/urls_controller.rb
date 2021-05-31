@@ -1,5 +1,5 @@
 class UrlsController < ApplicationController
   def index
-    render
+    @urls = Url.all
   end
 end

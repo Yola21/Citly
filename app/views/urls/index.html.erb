@@ -1,1 +1,6 @@
-<h1>This is Citly Assignment</h1>
+<% @urls.each do |url| %>
+  <p>
+    <%= url.id %>
+    <%= url.title %>
+  </p>
+<% end %>
