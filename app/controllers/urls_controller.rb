@@ -1,5 +1,6 @@
 class UrlsController < ApplicationController
   def index
-    @urls = Url.all
+    urls = URL.all
+    render status: :ok, json: { urls: urls }
   end
 end
