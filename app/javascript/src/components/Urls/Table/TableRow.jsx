@@ -10,7 +10,13 @@ const TableRow = ({ data, destroyTask, updateTask }) => {
             className="px-6 py-4 text-sm font-medium
             leading-5 text-bb-gray whitespace-no-wrap"
           >
-            {rowData.url}
+            <a
+              href={rowData.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {rowData.url}
+            </a>
           </td>
         </tr>
       ))}
