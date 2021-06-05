@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Dashboard from "components/Dashboard";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-// import CreateUrl from "./components/Urls/CreateUrl";
+import { ToastContainer } from "react-toastify";
+import { registerIntercepts, setAuthHeaders } from "apis/axios";
+import { initializeLogger } from "common/logger";
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    initializeLogger();
+    registerIntercepts();
+    setAuthHeaders(setLoading);
+  }, []);
+
   return (
     <Router>
+      <ToastContainer />
       <Switch>
-        {/* <Route exact path="/urls/create" component={CreateUrl} /> */}
         <Route exact path="/dashboard" component={Dashboard} />
       </Switch>
     </Router>
