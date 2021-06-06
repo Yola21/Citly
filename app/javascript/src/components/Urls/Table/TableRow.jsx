@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TableRow = ({ data, destroyTask, updateTask }) => {
+const TableRow = ({ data }) => {
   return (
     <tbody className="bg-white divide-y divide-gray-200">
       {data.map(rowData => (
         <tr key={rowData.id}>
+          <td></td>
           <td
             className="px-6 py-4 text-sm font-medium
             leading-5 text-bb-gray whitespace-no-wrap"
@@ -30,6 +31,7 @@ const TableRow = ({ data, destroyTask, updateTask }) => {
               {rowData.shortened_url}
             </a>
           </td>
+          <td></td>
         </tr>
       ))}
     </tbody>
