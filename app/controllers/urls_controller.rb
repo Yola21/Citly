@@ -1,19 +1,19 @@
 class UrlsController < ApplicationController
   before_action :load_url, only: :show
-  before_action :validates_url, only: :create
+  before_action :validates_url, :check_uniqueness_of_url, only: :create
   before_action :load_updated_url, only: :update
   
   def index
     urls = Url.all
-    render status: :ok, json: { urls: urls }
+    render status: :ok, json: { urls: urls.organize() }
   end
 
   def create
     @slug = SecureRandom.alphanumeric(6)
-    @shortened_url = "http://127.0.0.1:3000/#{@slug}"
+    @shortened_url = "http://cit.ly/#{@slug}"
     @url = Url.new(url_params.merge(slug: @slug, shortened_url: @shortened_url))
     if @url.save
-      render status: :ok, json: { notice: 'Shortened URL was successfully created' }
+      render status: :ok, json: { notice: 'Shortened URL is ready!' }
     else
       errors = @url.errors.full_messages
       render status: :unprocessable_entity, json: { errors: errors  }
@@ -28,9 +28,7 @@ class UrlsController < ApplicationController
 
   def update
     if @url.update(url_params)
-      render status: :ok, json: {
-        message: 'Link has been pinned'
-    }
+      render status: :ok, json: { message: 'URL has been pinned!' }
     else
       render status: :unprocessable_entity,
       json: { error: @url.errors.full_messages.to_sentence }
@@ -40,7 +38,7 @@ class UrlsController < ApplicationController
   private
 
   def url_params
-    params.require(:url).permit(:url, :number_of_clicks, :pinned)
+    params.require(:url).permit(:url, :number_of_clicks, :status)
   end
 
   def load_url
@@ -60,5 +58,12 @@ class UrlsController < ApplicationController
     @url = Url.find_by_slug!(params[:slug])
     rescue ActiveRecord::RecordNotFound => errors
       render json: {errors: errors}
+  end
+
+  def check_uniqueness_of_url
+    url = Url.find_by(url: url_params[:url])
+    if url
+      render status: :unprocessable_entity, json: { info: t('url_already_exist') }
+    end
   end
 end

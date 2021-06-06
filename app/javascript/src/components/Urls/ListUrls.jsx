@@ -1,10 +1,11 @@
 import React from "react";
 import Table from "./Table";
 
-const ListUrls = ({ data, handleClickCounter }) => {
+const ListUrls = ({ data, handleClickCounter, handlePinned }) => {
   return <Table 
     data={data}
     handleClickCounter={handleClickCounter} 
+    handlePinned={handlePinned}
   />;
 };
 

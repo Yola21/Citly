@@ -48,6 +48,16 @@ const Dashboard = ({ history }) => {
     }
   };
 
+  const handlePinned = async (slug, status) => {
+    try{
+      const toggleStatus = status === 'pinned' ? 'unpinned' : 'pinned';
+      await urlsApi.update({ slug, payload: { url: { status: toggleStatus } }, });
+      fetchUrls();
+    } catch (error){
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchUrls();
   }, []);
@@ -72,6 +82,7 @@ const Dashboard = ({ history }) => {
         <ListUrls 
           data={urls}
           handleClickCounter={handleClickCounter} 
+          handlePinned={handlePinned}
         />
       </Container>
     );
