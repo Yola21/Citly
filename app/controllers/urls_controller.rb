@@ -1,6 +1,7 @@
 class UrlsController < ApplicationController
-  before_action :load_url, only: [:show]
+  before_action :load_url, only: :show
   before_action :validates_url, only: :create
+  before_action :load_updated_url, only: :update
   
   def index
     urls = Url.all
@@ -23,13 +24,23 @@ class UrlsController < ApplicationController
 
   def show
     @url = Url.find_by_slug!(params[:slug])
-    redirect_to @url.url
+  end
+
+  def update
+    if @url.update(url_params)
+      render status: :ok, json: {
+        message: 'Link has been pinned'
+    }
+    else
+      render status: :unprocessable_entity,
+      json: { error: @url.errors.full_messages.to_sentence }
+    end
   end
 
   private
 
   def url_params
-    params.require(:url).permit(:url)
+    params.require(:url).permit(:url, :number_of_clicks, :pinned)
   end
 
   def load_url
@@ -43,5 +54,11 @@ class UrlsController < ApplicationController
     unless (url_params[:url] =~ /\A#{URI::regexp(['http', 'https'])}\z/)
       render status: :unprocessable_entity, json: { errors: t('url_error') }
     end
+  end
+
+  def load_updated_url
+    @url = Url.find_by_slug!(params[:slug])
+    rescue ActiveRecord::RecordNotFound => errors
+      render json: {errors: errors}
   end
 end

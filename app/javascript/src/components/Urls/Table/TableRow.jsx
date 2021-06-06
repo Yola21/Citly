@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TableRow = ({ data }) => {
+const TableRow = ({ data, handleClickCounter }) => {
   return (
     <tbody className="bg-white divide-y divide-gray-200">
       {data.map(rowData => (
@@ -21,17 +21,14 @@ const TableRow = ({ data }) => {
           </td>
           <td
             className="px-6 py-4 text-sm font-medium
-            leading-5 text-bb-gray whitespace-no-wrap"
+            leading-5 text-bb-gray whitespace-no-wrap cursor-pointer"
+            onClick={() => handleClickCounter(rowData.slug, rowData.url, rowData.number_of_clicks)}
           >
-            <a
-              href={rowData.shortened_url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {rowData.shortened_url}
-            </a>
+            {rowData.shortened_url}
           </td>
-          <td></td>
+          <td>
+            {rowData.number_of_clicks}
+          </td>
         </tr>
       ))}
     </tbody>

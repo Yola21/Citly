@@ -30,9 +30,20 @@ const Dashboard = ({ history }) => {
       await urlsApi.create({ url: { url } });
       fetchUrls();
       setLoading(false);
-      // history.push("/dashboard");
     } catch (error) {
       logger.error(error);
+      setLoading(false);
+    }
+  };
+
+  const handleClickCounter = async (slug, url, counter) => {
+    try{
+      await urlsApi.update({ slug, payload: { url: { number_of_clicks: counter + 1 } } });
+      window.open(url, "_blank");
+      fetchUrls();
+    }
+    catch(e){
+      console.log(e);
       setLoading(false);
     }
   };
@@ -58,7 +69,10 @@ const Dashboard = ({ history }) => {
           loading={loading}
           handleSubmit={handleSubmit}
         />
-        <ListUrls data={urls} />
+        <ListUrls 
+          data={urls}
+          handleClickCounter={handleClickCounter} 
+        />
       </Container>
     );
   }

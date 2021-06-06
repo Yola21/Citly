@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_05_080211) do
+ActiveRecord::Schema.define(version: 2021_06_06_074708) do
 
   create_table "urls", force: :cascade do |t|
     t.text "url", null: false
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2021_06_05_080211) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug", null: false
     t.string "shortened_url", null: false
+    t.integer "pinned", default: 0, null: false
+    t.integer "number_of_clicks", default: 0, null: false
   end
 
 end
