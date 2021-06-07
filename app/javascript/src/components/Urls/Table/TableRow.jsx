@@ -7,16 +7,16 @@ const TableRow = ({ data, handleClickCounter, handlePinned }) => {
     <tbody className="bg-white divide-y divide-gray-200">
       {data.map(rowData => (
         <tr key={rowData.id}>
-          <td className="pl-6 py-4 text-center cursor-pointer whitespace-no-wrap bg-gray-100">
+          <td className="py-4 text-center cursor-pointer whitespace-no-wrap bg-gray-100">
             <i
               className={classnames(
-                "transition duration-300 ease-in-out text-2xl hover:text-bb-yellow p-1",
+                "transition duration-300 ease-in-out text-2xl p-1",
                 {
                   "text-bb-border ri-pushpin-2-line":
                     rowData.status !== "pinned",
                 },
                 {
-                  "text-white text-bb-yellow ri-pushpin-2-fill":
+                  "text-purple-500 ri-pushpin-2-fill":
                     rowData.status === "pinned",
                 }
               )}

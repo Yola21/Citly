@@ -4,21 +4,21 @@ import { compose, head, join, juxt, tail, toUpper } from "ramda";
 const TableHeader = () => {
   return (
     <thead>
-      <tr>
-        <th className="px-6 py-3 bg-gray-50"></th>
+      <tr className="bg-purple-800 text-white">
+        <th className="px-6 py-3"></th>
         <th
-          className="px-6 py-3 text-xs font-bold leading-4 tracking-wider
-        text-left text-bb-gray-600 text-opacity-50 uppercase bg-gray-50"
+          className="px-6 py-3 text-lg font-bold leading-4 tracking-wider
+        text-left text-opacity-50"
         >
           Original URL
         </th>
         <th
-          className="px-6 py-3 text-sm font-bold leading-4 tracking-wider
-        text-left text-bb-gray-600 text-opacity-50 bg-gray-50"
+          className="px-6 py-3 text-lg font-bold leading-4 tracking-wider
+        text-left text-opacity-50"
         >
           Shortened URL
         </th>
-        <th className="px-6 py-3 bg-gray-50"></th>
+        <th className="px-6 py-3"></th>
       </tr>
     </thead>
   );

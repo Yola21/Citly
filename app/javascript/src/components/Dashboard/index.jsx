@@ -89,17 +89,16 @@ const Dashboard = ({ history }) => {
   }
 
   return (
-    <Container>
-      <CreateUrl 
-        url={url}
-        setUrl={setUrl}
-        loading={loading}
-        handleSubmit={handleSubmit}
-      />
-      <h1 className="text-xl leading-5 text-center">
-        You have not shortened any URLs 😔
-      </h1>
-    </Container>
+    <div className="bg-gray-200">
+      <Container>
+        <CreateUrl 
+          url={url}
+          setUrl={setUrl}
+          loading={loading}
+          handleSubmit={handleSubmit}
+        />
+      </Container>
+    </div>
   );
 };
 

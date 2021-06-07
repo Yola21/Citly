@@ -4,8 +4,7 @@ const NavItem = ({ name }) => {
   return (
     <h1 
       className="flex items-center px-1 pt-1 mr-3
-      font-bold text-lg leading-5
-      text-gray-500"
+      font-bold text-2xl text-gray-800"
     >
       {name}
     </h1>

@@ -17,7 +17,7 @@ const UrlForm = ({
       />
       <Button
         type="submit"
-        buttonText="Shorten URL!"
+        buttonText="Shorten!"
         loading={loading}
       />
     </form>
